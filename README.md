@@ -12,7 +12,7 @@ A comprehensive, structured Python learning path from fundamentals to deployment
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
-- [Module 1 — Basics](#-module-1--basics)
+- [Module 1 — Python-Fundamentals](#-module-1--python-fundamentals)
 - [Module 2 — Functions](#-module-2--functions)
 - [Module 3 — Data Structures](#-module-3--data-structures)
 - [Module 4 — Collections Module](#-module-4--collections-module)
@@ -52,7 +52,7 @@ print("Hello, World!")
 
 ---
 
-## 📌 Module 1 — Basics
+## 📌 Module 1 — Python-Fundamentals
 
 > **Duration:** 2–3 weeks | **Difficulty:** 🟢 Beginner
 
