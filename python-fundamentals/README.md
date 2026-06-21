@@ -1,47 +1,50 @@
+
 # 🐍 Python Mastery Syllabus
+![Python Version](https://img.shields.io/badge/Python-3.13.1-blue?style=flat-square&logo=python)
+![Source](https://img.shields.io/badge/Source-GeeksforGeeks-brightgreen?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange?style=flat-square)
 
-[![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-
-> A comprehensive, structured Python learning path from fundamentals to deployment — covering 10 focused modules for beginners to advanced learners.
+A comprehensive, structured Python learning path from fundamentals to deployment — covering core Python, data structures, OOP, file handling, databases, data science, and web development, sourced from GeeksforGeeks Python Tutorial.
 
 ---
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Syllabus Modules](#syllabus-modules)
-  - [Module 1: Python Foundations](#module-1-python-foundations)
-  - [Module 2: Strings & Control Flow](#module-2-strings--control-flow)
-  - [Module 3: Data Structures](#module-3-data-structures)
-  - [Module 4: Functions & Functional Programming](#module-4-functions--functional-programming)
-  - [Module 5: Modules, Packages & File Handling](#module-5-modules-packages--file-handling)
-  - [Module 6: Exception Handling & Debugging](#module-6-exception-handling--debugging)
-  - [Module 7: Object-Oriented Programming (OOP)](#module-7-object-oriented-programming-oop)
-  - [Module 8: Advanced Python](#module-8-advanced-python)
-  - [Module 9: Concurrency, Networking & Automation](#module-9-concurrency-networking--automation)
-  - [Module 10: Testing, Deployment & Real-World Projects](#module-10-testing-deployment--real-world-projects)
-- [Learning Path](#learning-path)
-- [Prerequisites](#prerequisites)
-- [Resources](#resources)
-- [Contributing](#contributing)
-- [License](#license)
+- [Overview](#-overview)
+- [Module 1 — Basics](#-module-1--basics)
+- [Module 2 — Functions](#-module-2--functions)
+- [Module 3 — Data Structures](#-module-3--data-structures)
+- [Module 4 — Collections Module](#-module-4--collections-module)
+- [Module 5 — OOP Concepts](#-module-5--oop-concepts)
+- [Module 6 — Exception Handling](#-module-6--exception-handling)
+- [Module 7 — File Handling](#-module-7--file-handling)
+- [Module 8 — Database Handling](#-module-8--database-handling)
+- [Module 9 — Packages & Libraries](#-module-9--packages--libraries)
+- [Module 10 — Practice & Interview Prep](#-module-12--practice--interview-prep)
+- [Learning Path](#-learning-path)
+- [Resources](#-resources)
 
 ---
 
 ## 🎯 Overview
 
-This syllabus is designed to take you from a complete beginner to a proficient Python developer. Each module builds upon the previous one, ensuring a solid foundation while progressively introducing advanced concepts.
+Python is one of the most popular programming languages. It's simple to use, packed with features, and supported by a wide range of libraries and frameworks. Its clean syntax makes it beginner-friendly.
 
-**Key Features:**
-- ✅ Structured progression from basics to advanced topics
-- ✅ Hands-on practical examples in each module
-- ✅ Real-world project applications
-- ✅ Industry best practices and coding standards
-- ✅ Comprehensive coverage of Python ecosystem
+```python
+print("Hello, World!")
+```
 
-**Target Audience:**
+### Why Learn Python?
+
+✅ Fewer lines of code compared to Java and C++  
+✅ Huge ecosystem — Django, Flask, Pandas, TensorFlow, Scikit-learn  
+✅ Cross-platform — works on Windows, Mac, and Linux  
+✅ Used by top companies — Google, Netflix, NASA  
+✅ High job demand in Software Dev, Data Science, and AI/ML  
+
+### Target Audience
+
 - Complete beginners to programming
 - Developers transitioning from other languages
 - Students preparing for technical interviews
@@ -49,292 +52,257 @@ This syllabus is designed to take you from a complete beginner to a proficient P
 
 ---
 
-## 📚 Syllabus Modules
+## 📌 Module 1 — Basics
 
-### Module 1: Python Foundations
+> **Duration:** 2–3 weeks | **Difficulty:** 🟢 Beginner
 
-**Duration:** 2-3 weeks | **Difficulty:** Beginner
+Learn the absolute fundamentals of Python — installation, syntax, variables, operators, data types, conditionals, and loops.
 
-Learn the absolute fundamentals of Python programming.
+> 📥 Install Python first → Download Python 3 from python.org
 
-#### Topics Covered:
-- **Python Basics**
-  - What is Python? Features, applications, and ecosystem
-  - Installing Python, setting up IDEs (VS Code, PyCharm, Jupyter)
-  - Python Interpreter, REPL, and running scripts
-  - Basic syntax, indentation, and comments
+| Topic |
+|-------|
+| Introduction to Python |
+| Applications of Python |
+| Input and Output |
+| Variables |
+| Operators |
+| Keywords |
+| Data Types |
+| Conditional Statements |
+| Loops |
 
-- **Core Concepts**
-  - Input/Output functions (`input()`, `print()`)
-  - Variables & Keywords
-  - Data types & Type conversion and type checking (`type()`, `isinstance()`)
-  - Operators: Arithmetic, Relational, Logical, Assignment, Bitwise
-
-
----
-
-### Module 2: Strings & Control Flow
-
-**Duration:** 2 weeks | **Difficulty:** Beginner
-
-Master string manipulation and control program flow with conditionals and loops.
-
-#### Topics Covered:
-- **String Operations**
-  - Slicing, methods, f-strings, raw strings
-
-- **Control Structures**
-  - Conditional statements: `if`, `elif`, `else`
-  - Loops: `for`, `while`
-  - Loop control: `break`, `continue`, `pass`
-  - Built-in functions: `range()`, `enumerate()`, `zip()`
-
-- **Iterables**
-  - Iterables vs Iterators (conceptual intro)
-
-
+**Quizzes:** Basics · I/O · Data Types · Numbers · Boolean · Loops · Control Flow
 
 ---
 
-### Module 3: Data Structures
+## ⚙️ Module 2 — Functions
 
-**Duration:** 2-3 weeks | **Difficulty:** Beginner to Intermediate
+> **Duration:** 2 weeks | **Difficulty:** 🟢 Beginner
 
-Deep dive into Python's built-in data structures.
+Explore Python function syntax, parameter handling, return values, variable scope, lambda functions, and decorators.
 
-#### Topics Covered:
-- **Lists** — indexing, slicing, methods, nested lists
-- **Tuples** — immutability, packing/unpacking, named tuples
-- **Sets** — unique elements, union, intersection, difference
-- **Dictionaries** — key-value pairs, methods, nested dicts
-- **Comprehensions** — list, set, dict, and conditional comprehensions
-- **Best Practices** — Choosing the right data structure
+| Topic |
+|-------|
+| Functions |
+| Pass in Functions |
+| Global and Local Variables |
+| Recursion |
+| *args and **kwargs |
+| First Class Functions |
+| Lambda Functions |
+| Map, Reduce, Filter |
+| Inner Functions |
+| Decorators |
 
-
-
----
-
-### Module 4: Functions & Functional Programming
-
-**Duration:** 2 weeks | **Difficulty:** Intermediate
-
-Learn to write reusable code with functions and functional programming concepts.
-
-#### Topics Covered:
-- **Function Fundamentals**
-  - Defining and calling functions
-  - Arguments: positional, keyword, default, `*args`, `**kwargs`
-  - Return values and multiple returns
-  - Scope: local, global, `nonlocal`
-
-- **Functional Programming**
-  - Lambda functions
-  - `map()`, `filter()`, `reduce()`
-  - `functools` — `lru_cache`, `partial`
-  - Recursion and memoization
-
-
+**Quiz:** Functions
 
 ---
 
-### Module 5: Modules, Packages & File Handling
+## 🗂️ Module 3 — Data Structures
 
-**Duration:** 2 weeks | **Difficulty:** Intermediate
+> **Duration:** 2–3 weeks | **Difficulty:** 🟡 Intermediate
 
-Organize code and work with external files and modules.
+Python offers versatile built-in data types. Learn each one in detail — from strings and lists to sets and comprehensions.
 
-#### Topics Covered:
-- **Modules & Packages**
-  - Importing modules (`import`, `from ... import`, aliasing)
-  - Built-in modules: `math`, `random`, `datetime`, `os`, `sys`
-  - Creating custom modules and packages
+| Topic |
+|-------|
+| Strings |
+| Lists |
+| Tuples |
+| Dictionaries |
+| Sets |
+| Arrays |
+| List Comprehension |
 
-- **File Handling**
-  - File operations: `open()`, `read()`, `write()`, `with` statement
-  - File modes: `r`, `w`, `a`, `rb`, `wb`
-  - Working with CSV (`csv` module) and JSON (`json` module)
-  - `os` and `shutil` for file/folder operations
-
-
----
-
-### Module 6: Exception Handling & Debugging
-
-**Duration:** 1-2 weeks | **Difficulty:** Intermediate
-
-Write robust, error-free code with proper exception handling.
-
-#### Topics Covered:
-- **Exception Handling**
-  - `try`, `except`, `else`, `finally`
-  - Catching specific vs. general exceptions
-  - Raising exceptions (`raise`)
-  - Custom exception classes
-
-- **Debugging**
-  - Assertions (`assert`)
-  - Debugging basics: `pdb`, print debugging, `logging` module
-
-
+**Quizzes:** String · List · Tuples · Dictionary · Sets · Arrays · List Comprehension
 
 ---
 
-### Module 7: Object-Oriented Programming (OOP)
+## 📦 Module 4 — Collections Module
 
-**Duration:** 3-4 weeks | **Difficulty:** Intermediate to Advanced
+> **Duration:** 1 week | **Difficulty:** 🟡 Intermediate
 
-Master OOP concepts and design patterns in Python.
+Python's `collections` module offers specialized, high-performance data structures beyond the built-in types.
 
-#### Topics Covered:
-- **Core OOP Concepts**
-  - Classes & Objects, `__init__` constructor
-  - Instance vs. class variables
-  - Instance, class, and static methods
-  - Encapsulation (public, protected, private)
+| Topic |
+|-------|
+| Counter |
+| Heapq |
+| Deque |
+| OrderedDict |
+| Defaultdict |
 
-- **Advanced OOP**
-  - Inheritance — single, multiple, multilevel
-  - Method overriding & `super()`
-  - Polymorphism & Duck typing
-  - Abstraction (`ABC` module, abstract methods)
-  - Magic/Dunder methods: `__str__`, `__repr__`, `__len__`, `__eq__`, etc.
+**Quizzes:** Counter · Heapq · Deque · OrderedDict
 
-
+> 📘 Complete DSA with Python Tutorial → GeeksforGeeks DSA
 
 ---
 
-### Module 8: Advanced Python
+## 🏗️ Module 5 — OOP Concepts
 
-**Duration:** 3 weeks | **Difficulty:** Advanced
+> **Duration:** 3–4 weeks | **Difficulty:** 🟡 Intermediate
 
-Explore advanced Python features and techniques.
+Master object-oriented programming — from classes and objects to encapsulation, inheritance, polymorphism, and iterators.
 
-#### Topics Covered:
-- **Iterators & Generators**
-  - `yield`, `next()`, `iter()`
+| Topic |
+|-------|
+| Python OOP Overview |
+| Classes and Objects |
+| Constructors |
+| Self as Default Argument |
+| Polymorphism |
+| Inheritance |
+| Abstraction |
+| Encapsulation |
+| Iterators |
 
-- **Decorators & Context Managers**
-  - Function decorators, chaining, `@wraps`
-  - Context Managers (`with`, `__enter__`, `__exit__`, `contextlib`)
-
-- **Standard Library Deep Dive**
-  - Regular Expressions (`re` module — patterns, search, match, sub)
-  - `collections`: `Counter`, `defaultdict`, `deque`, `OrderedDict`
-  - `itertools`: `permutations`, `combinations`, `chain`, `product`
-
-- **Modern Python Features**
-  - Type Hinting & Annotations (`typing` module)
-  - Dataclasses (`@dataclass`)
-
+**Quiz:** OOP Concepts
 
 ---
 
-### Module 9: Concurrency, Networking & Automation
+## ⚠️ Module 6 — Exception Handling
 
-**Duration:** 3 weeks | **Difficulty:** Advanced
+> **Duration:** 1 week | **Difficulty:** 🟡 Intermediate
 
-Build network applications and automate tasks.
+Write fault-tolerant code by understanding how Python handles unexpected errors using try, except, and custom exceptions.
 
-#### Topics Covered:
-- **Concurrency**
-  - Threading, multiprocessing
-  - `asyncio` — `async`/`await`, event loops
+| Topic |
+|-------|
+| Exception Handling |
+| Built-in Exceptions |
+| User-Defined Exceptions |
 
-- **Networking & Web**
-  - Web scraping: `requests`, `BeautifulSoup`, `Selenium`
-  - Working with REST APIs (`requests`, JSON parsing)
-  - Intro to `socket` module for networking
-
-- **Automation**
-  - `subprocess` — running system commands
-  - Virtual environments: `venv`, `pipenv`, `conda`
-
-
+**Quiz:** Exception Handling
 
 ---
 
-### Module 10: Testing, Deployment & Real-World Projects
+## 📁 Module 7 — File Handling
 
-**Duration:** 3-4 weeks | **Difficulty:** Advanced
+> **Duration:** 1 week | **Difficulty:** 🟡 Intermediate
 
-Prepare production-ready code with testing and deployment practices.
+Learn to read from and write to files, manage directories, and work with the `os` and `pathlib` modules.
 
-#### Topics Covered:
-- **Testing**
-  - Unit testing with `unittest` and `pytest`
-  - Mocking & patching (`unittest.mock`)
-  - Test coverage with `coverage.py`
+| Topic |
+|-------|
+| File Handling Overview |
+| Read Files |
+| Write / Create Files |
+| OS Module |
+| pathlib Module |
+| Directory Management |
 
-- **Code Quality**
-  - Code style: PEP8, `pylint`, `black`
-  - Docstrings and documentation with `Sphinx`
+**Quiz:** File Handling
 
-- **Deployment**
-  - Packaging with `setuptools`, publishing to PyPI via `twine`
-  - Logging in production (`logging` module best practices)
+---
 
+## 🗄️ Module 8 — Database Handling
+
+> **Duration:** 1 week | **Difficulty:** 🟡 Intermediate
+
+Learn to connect Python with MySQL and MongoDB databases for storing and retrieving real-world data.
+
+| Topic |
+|-------|
+| MongoDB with Python |
+| MySQL with Python |
+
+---
+
+## 🧰 Module 9 — Packages & Libraries
+
+> **Duration:** 1 week | **Difficulty:** 🟡 Intermediate
+
+Python's rich ecosystem of packages and standard libraries saves development time with ready-to-use tools.
+
+| Topic |
+|-------|
+| Packages |
+| Built-in Modules |
+| DSA Libraries |
+| GUI Libraries |
 
 
 ---
 
 ## 🛤️ Learning Path
 
-### Recommended Study Plan
+| Phase | Module | Duration | Difficulty |
+|-------|--------|----------|------------|
+| **Phase 1** | Module 1 — Basics | 2–3 weeks | 🟢 Beginner |
+| **Phase 2** | Module 2 — Functions | 2 weeks | 🟢 Beginner |
+| **Phase 3** | Module 3 — Data Structures | 2–3 weeks | 🟡 Intermediate |
+| **Phase 4** | Module 4 — Collections | 1 week | 🟡 Intermediate |
+| **Phase 5** | Module 5 — OOP | 3–4 weeks | 🟡 Intermediate |
+| **Phase 6** | Module 6 — Exception Handling | 1 week | 🟡 Intermediate |
+| **Phase 7** | Module 7 — File Handling | 1 week | 🟡 Intermediate |
+| **Phase 8** | Module 8 — Database Handling | 1 week | 🟡 Intermediate |
+| **Phase 9** | Module 9 — Packages & Libraries | 1 week | 🟡 Intermediate |
+| **Phase 10** | Module 10 — Data Science | 6–8 weeks | 🔴 Advanced |
+| **Phase 11** | Module 11 — Web Development | 6–8 weeks | 🔴 Advanced |
+| **Phase 12** | Module 12 — Practice & Interview Prep | Ongoing | 🟡–🔴 |
 
-| Phase | Modules | Duration | Focus |
-|-------|---------|----------|-------|
-| **Beginner** | 1-3 | 6-8 weeks | Foundations & Data Structures |
-| **Intermediate** | 4-6 | 6-7 weeks | Functions, Modules & Error Handling |
-| **Advanced** | 7-8 | 6-7 weeks | OOP & Advanced Features |
-| **Professional** | 9-10 | 6-8 weeks | Concurrency, Testing & Deployment |
+**Total Estimated Time:** 6–8 months at 10–15 hours/week
 
-**Total Estimated Time:** 24-30 weeks (6-8 months) at 10-15 hours/week
+### Tips for Success
 
-### Tips for Success:
-1. **Practice Daily** — Code at least 1 hour every day
-2. **Build Projects** — Apply concepts in real projects after each module
-3. **Code Review** — Share your code and get feedback
-4. **Join Communities** — Engage with Python communities (Reddit, Discord, Stack Overflow)
-5. **Read Documentation** — Get comfortable with official Python docs
-
----
-
-## 📝 Prerequisites
-
-### Before Starting:
-- Basic computer literacy
-- Ability to install software
-- Text editor/IDE familiarity (helpful but not required)
-- Problem-solving mindset
-
-### Recommended Background:
-- No prior programming experience required
-- Understanding of basic algebra helps
-- Familiarity with command line is a plus
+- 🔥 **Practice Daily** — Code at least 1 hour every day
+- 🏗️ **Build Projects** — Apply concepts after each module
+- 📖 **Read Documentation** — Get comfortable with official Python docs
+- 🤝 **Join Communities** — Reddit, Discord, Stack Overflow
+- 🔁 **Revise & Repeat** — Take quizzes at the end of every section
 
 ---
 
 ## 📖 Resources
 
 ### Official Documentation
-- [Python.org](https://www.python.org/) — Official Python website
-- [Python Documentation](https://docs.python.org/3/) — Comprehensive reference
-- [PEP 8](https://peps.python.org/pep-0008/) — Style Guide for Python Code
+
+| Resource |
+|----------|
+| Python Official Site — python.org |
+| Python 3 Documentation — docs.python.org |
+| PEP 8 Style Guide — peps.python.org |
+| GFG Python Tutorial — geeksforgeeks.org |
+
+### GFG Full Tutorials
+
+| Tutorial |
+|----------|
+| NumPy Tutorial |
+| Pandas Tutorial |
+| Matplotlib Tutorial |
+| Seaborn Tutorial |
+| Scikit-learn Tutorial |
+| Keras Tutorial |
+| LightGBM Tutorial |
+| Flask Tutorial |
+| Django Tutorial |
+| MongoDB Tutorial |
 
 ### Practice Platforms
-- [LeetCode](https://leetcode.com/) — Algorithm practice
-- [HackerRank](https://www.hackerrank.com/domains/python) — Python challenges
-- [Codewars](https://www.codewars.com/) — Kata exercises
-- [Real Python](https://realpython.com/) — Tutorials and articles
 
-### Books (Optional)
-- *Python Crash Course* by Eric Matthes
-- *Automate the Boring Stuff with Python* by Al Sweigart
-- *Fluent Python* by Luciano Ramalho (Advanced)
+| Platform |
+|----------|
+| LeetCode — leetcode.com |
+| HackerRank — hackerrank.com |
+| GeeksforGeeks Practice — practice.geeksforgeeks.org |
+| Real Python — realpython.com |
 
-### Video Courses
-- [freeCodeCamp Python Course](https://www.youtube.com/watch?v=rfscVS0vtbw)
-- [Corey Schafer's Python Tutorials](https://www.youtube.com/c/Coreyms)
+---
+
+> This tutorial is based on Python **3.13.1** — the latest stable version.
+
+---
+
+Happy Learning! 🚀
+
+Contributions and suggestions are welcome!
+
+Maintained by: Sablu Chaudhary  
+🔗 Connect: LinkedIn · GitHub · SSoft.in
+
+*Made with ❤️ for the Open Source Community*
 
 ---
 <br>
