@@ -1,0 +1,6 @@
+--- Report for password length 8 ---
+Rating: MODERATE
+- Good length (8+ characters)
+- Missing uppercase letters
+- Missing numbers
+==============================
