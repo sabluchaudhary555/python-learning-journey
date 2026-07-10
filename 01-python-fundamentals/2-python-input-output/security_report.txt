@@ -4,3 +4,27 @@ Rating: MODERATE
 - Missing uppercase letters
 - Missing numbers
 ==============================
+--- Report for password length 8 ---
+Estimated Crack Time: 10 seconds
+Strength Score: 6%
+Rating: WEAK
+- Good length (8+ characters)
+- Missing uppercase letters
+- Missing numbers
+- Missing special symbols
+==============================
+--- Report for password length 8 ---
+Estimated Crack Time: 10 seconds
+Strength Score: 6%
+Rating: WEAK
+- Good length (8+ characters)
+- Missing uppercase letters
+- Missing numbers
+- Missing special symbols
+==============================
+--- Report for password length 12 ---
+Estimated Crack Time: 754,567 years
+Strength Score: 76%
+Rating: MODERATE
+- Excellent length (12+ characters)
+==============================

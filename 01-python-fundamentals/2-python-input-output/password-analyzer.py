@@ -153,4 +153,10 @@ def check_password_strength():
 
 # Run the program
 if __name__ == "__main__":
-    check_password_strength()
+    while True:
+        check_password_strength()
+
+        again = input("\nCheck another password? (yes/no): ").strip().lower()
+        if again != 'yes':
+            print("\nExiting Secure Password Analyzer. Stay safe!")
+            break
