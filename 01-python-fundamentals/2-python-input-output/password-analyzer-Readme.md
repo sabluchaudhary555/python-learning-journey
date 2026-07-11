@@ -25,7 +25,7 @@ A command-line Python tool that analyzes password strength by estimating how lon
 
 ## Strength Scale
 
-| Strength Score | Rating   |
+| Strength Score  | Rating   |
 |-----------------|----------|
 | 80–100%         | STRONG   |
 | 40–79%          | MODERATE |
