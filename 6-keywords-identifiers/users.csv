@@ -1,0 +1,2 @@
+user_id,name,username,email,phone,age,password_hash
+U1001,hacker,hacker555,hacker@gmail.com,1234567890,20,008ad8b4a772c6bf02a64bbe92842532bb5cff48667f31e6600b0ca999fecc2f

@@ -1,11 +1,18 @@
 import re
 import os
+import csv
+import random
+import hashlib
 
-# simple form validation tool - checks common form fields before they get saved
-# useful for signup forms, admin panels, data entry sheets etc.
+# Smart Form Input Checker - now works more like an actual signup system
+# validates fields, blocks duplicate accounts, hashes passwords, verifies email with OTP,
+# lets you search/edit/delete records - basically a mini user registration system
 
-SAVE_FILE = "valid_entries.txt"
+SAVE_FILE = "users.csv"
+FIELDS = ["user_id", "name", "username", "email", "phone", "age", "password_hash"]
 
+
+# ---------- validation rules ----------
 
 def check_name(name):
     name = name.strip()
@@ -65,7 +72,7 @@ def check_password(password):
     return True, "OK"
 
 
-def ask_until_valid(field_name, check_func, hide_input=False):
+def ask_until_valid(field_name, check_func):
     while True:
         value = input(f"Enter {field_name}: ")
         ok, msg = check_func(value)
@@ -75,21 +82,188 @@ def ask_until_valid(field_name, check_func, hide_input=False):
         print(f"  -> {msg}, try again")
 
 
-def fill_form():
-    print("\n--- New Form Entry ---")
-    name = ask_until_valid("full name", check_name)
-    username = ask_until_valid("username", check_username)
-    email = ask_until_valid("email", check_email)
+# ---------- storage helpers ----------
+
+def load_users():
+    if not os.path.exists(SAVE_FILE):
+        return []
+    with open(SAVE_FILE, newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def save_all_users(users):
+    with open(SAVE_FILE, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDS)
+        writer.writeheader()
+        writer.writerows(users)
+
+
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+
+def generate_user_id(users):
+    if not users:
+        return "U1001"
+    last_id = max(int(u["user_id"][1:]) for u in users)
+    return f"U{last_id + 1}"
+
+
+def username_taken(username, users):
+    return any(u["username"].lower() == username.lower() for u in users)
+
+
+def email_taken(email, users):
+    return any(u["email"].lower() == email.lower() for u in users)
+
+
+# ---------- OTP simulation ----------
+
+def verify_email_otp(email):
+    otp = str(random.randint(100000, 999999))
+    print(f"\n(simulated) OTP sent to {email}: {otp}")
+    attempts = 3
+    while attempts > 0:
+        entered = input("Enter the OTP to verify your email: ").strip()
+        if entered == otp:
+            print("Email verified!")
+            return True
+        attempts -= 1
+        print(f"Wrong OTP, {attempts} attempt(s) left")
+    print("Too many failed attempts, verification failed.")
+    return False
+
+
+# ---------- core actions ----------
+
+def sign_up():
+    print("\n--- New Account Signup ---")
+    users = load_users()
+
+    while True:
+        name = ask_until_valid("full name", check_name)
+        username = ask_until_valid("username", check_username)
+        if username_taken(username, users):
+            print("  -> That username is already taken, pick another")
+            continue
+        break
+
+    while True:
+        email = ask_until_valid("email", check_email)
+        if email_taken(email, users):
+            print("  -> An account with this email already exists")
+            continue
+        break
+
     phone = ask_until_valid("phone number", check_phone)
     age = ask_until_valid("age", check_age)
     password = ask_until_valid("password", check_password)
 
-    entry = f"{name} | {username} | {email} | {phone} | {age} | {'*' * len(password)}"
+    if not verify_email_otp(email):
+        print("Signup cancelled - email not verified.")
+        return
 
-    with open(SAVE_FILE, "a") as f:
-        f.write(entry + "\n")
+    new_user = {
+        "user_id": generate_user_id(users),
+        "name": name,
+        "username": username,
+        "email": email,
+        "phone": phone,
+        "age": age,
+        "password_hash": hash_password(password),
+    }
 
-    print("\nForm saved successfully!")
+    users.append(new_user)
+    save_all_users(users)
+    print(f"\nAccount created! Your user ID is {new_user['user_id']}")
+
+
+def log_in():
+    print("\n--- Login ---")
+    users = load_users()
+    username = input("Username: ").strip()
+    password = input("Password: ")
+
+    match = next((u for u in users if u["username"].lower() == username.lower()), None)
+    if not match:
+        print("No account found with that username.")
+        return
+
+    if match["password_hash"] == hash_password(password):
+        print(f"Welcome back, {match['name']}!")
+    else:
+        print("Wrong password.")
+
+
+def search_user():
+    users = load_users()
+    term = input("Search by username or email: ").strip().lower()
+    results = [u for u in users if term in u["username"].lower() or term in u["email"].lower()]
+
+    if not results:
+        print("No matching users.")
+        return
+
+    for u in results:
+        print(f"{u['user_id']} | {u['name']} | {u['username']} | {u['email']} | {u['phone']} | age {u['age']}")
+
+
+def edit_user():
+    users = load_users()
+    user_id = input("Enter user ID to edit: ").strip()
+    match = next((u for u in users if u["user_id"] == user_id), None)
+
+    if not match:
+        print("User not found.")
+        return
+
+    print("Leave blank to keep the current value.")
+    new_phone = input(f"Phone [{match['phone']}]: ").strip()
+    if new_phone:
+        ok, msg = check_phone(new_phone)
+        if ok:
+            match["phone"] = new_phone
+        else:
+            print(f"  -> {msg}, phone not updated")
+
+    new_email = input(f"Email [{match['email']}]: ").strip()
+    if new_email:
+        ok, msg = check_email(new_email)
+        if ok and not email_taken(new_email, [u for u in users if u["user_id"] != user_id]):
+            match["email"] = new_email
+        else:
+            print("  -> couldn't update email (invalid or already taken)")
+
+    save_all_users(users)
+    print("Profile updated.")
+
+
+def delete_user():
+    users = load_users()
+    user_id = input("Enter user ID to delete: ").strip()
+    match = next((u for u in users if u["user_id"] == user_id), None)
+
+    if not match:
+        print("User not found.")
+        return
+
+    confirm = input(f"Delete account for {match['name']} ({match['username']})? Type 'yes' to confirm: ")
+    if confirm.lower() == "yes":
+        users.remove(match)
+        save_all_users(users)
+        print("Account deleted.")
+    else:
+        print("Cancelled.")
+
+
+def view_all_users():
+    users = load_users()
+    if not users:
+        print("No registered users yet.")
+        return
+    print(f"\nTotal registered users: {len(users)}")
+    for u in users:
+        print(f"{u['user_id']} | {u['name']} | {u['username']} | {u['email']} | {u['phone']} | age {u['age']}")
 
 
 def check_single_field():
@@ -116,35 +290,15 @@ def check_single_field():
     print("Valid!" if ok else f"Invalid - {msg}")
 
 
-def view_saved_entries():
-    if not os.path.exists(SAVE_FILE):
-        print("No entries saved yet.")
-        return
-    print("\n--- Saved Entries ---")
-    with open(SAVE_FILE) as f:
-        lines = f.readlines()
-    if not lines:
-        print("File is empty.")
-        return
-    for i, line in enumerate(lines, 1):
-        print(f"{i}. {line.strip()}")
-
-
-def clear_entries():
-    confirm = input("This will delete all saved entries. Type 'yes' to confirm: ")
-    if confirm.lower() == "yes":
-        open(SAVE_FILE, "w").close()
-        print("All entries cleared.")
-    else:
-        print("Cancelled.")
-
-
 def menu():
-    print("\n===== Smart Form Input Checker =====")
-    print("1. Fill a new form")
-    print("2. Check a single field")
-    print("3. View saved entries")
-    print("4. Clear all entries")
+    print("\n===== Smart Form Input Checker - Mini Registration System =====")
+    print("1. Sign up (create account)")
+    print("2. Log in")
+    print("3. Search user")
+    print("4. Edit profile")
+    print("5. Delete account")
+    print("6. View all registered users")
+    print("7. Just check a single field (no saving)")
     print("0. Exit")
 
 
@@ -154,13 +308,19 @@ def main():
         choice = input("Choice: ").strip()
 
         if choice == "1":
-            fill_form()
+            sign_up()
         elif choice == "2":
-            check_single_field()
+            log_in()
         elif choice == "3":
-            view_saved_entries()
+            search_user()
         elif choice == "4":
-            clear_entries()
+            edit_user()
+        elif choice == "5":
+            delete_user()
+        elif choice == "6":
+            view_all_users()
+        elif choice == "7":
+            check_single_field()
         elif choice == "0":
             print("bye!")
             break
