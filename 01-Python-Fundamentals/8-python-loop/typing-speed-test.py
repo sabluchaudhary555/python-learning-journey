@@ -7,6 +7,7 @@ import os
 
 SCORE_FILE = "typing_scores.txt"
 
+# sentence banks for each difficulty - easy = short/simple, hard = long/technical
 EASY_SENTENCES = [
     "the cat sat on the mat",
     "i like to read books",
@@ -30,6 +31,7 @@ HARD_SENTENCES = [
 
 
 def pick_sentence(level):
+    # returns a random sentence from the bank matching the chosen difficulty
     if level == "1":
         return random.choice(EASY_SENTENCES)
     elif level == "2":
@@ -46,7 +48,7 @@ def calculate_accuracy(original, typed):
         if original[i] == typed[i]:
             correct += 1
 
-    # penalize for length mismatch too (missing or extra chars)
+    # penalize for length mismatch too (missing or extra chars typed)
     total = max(len(original), len(typed))
     if total == 0:
         return 0
@@ -54,6 +56,7 @@ def calculate_accuracy(original, typed):
 
 
 def find_wrong_words(original, typed):
+    # word-by-word comparison so we can tell the user exactly which words they messed up
     orig_words = original.split()
     typed_words = typed.split()
     wrong = []
@@ -66,6 +69,7 @@ def find_wrong_words(original, typed):
 
 
 def run_test():
+    # step 1: let user pick a difficulty level
     print("\nChoose difficulty:")
     print("1. Easy")
     print("2. Medium")
@@ -74,14 +78,16 @@ def run_test():
 
     sentence = pick_sentence(level)
 
+    # step 2: show the sentence only after user is ready, so timer starts fair
     print("\nType the following sentence as fast and accurately as you can.")
     print("Press Enter when you're ready to start...")
     input()
 
+    # step 3: start the clock right before showing the sentence to type
     print(f"\n{sentence}\n")
     start = time.time()
     typed = input("> ")
-    end = time.time()
+    end = time.time()   # stop the clock the moment they hit Enter
 
     time_taken = end - start
     if time_taken <= 0:
@@ -90,15 +96,18 @@ def run_test():
     word_count = len(sentence.split())
     char_count = len(sentence)
 
+    # step 4: core speed formulas - same ones real typing test sites use
     wpm = round((word_count / time_taken) * 60, 2)
     cpm = round((char_count / time_taken) * 60, 2)
     accuracy = calculate_accuracy(sentence, typed)
 
+    # step 5: show the result summary
     print("\n----- Result -----")
     print(f"Time taken   : {round(time_taken, 2)} seconds")
     print(f"Speed        : {wpm} WPM  ({cpm} CPM)")
     print(f"Accuracy     : {accuracy}%")
 
+    # step 6: point out exactly which words were typed wrong
     wrong = find_wrong_words(sentence, typed)
     if wrong:
         print(f"\nWords you got wrong ({len(wrong)}):")
@@ -112,12 +121,14 @@ def run_test():
 
 
 def save_score(wpm, accuracy, level):
+    # appends this attempt's result to the score file so history builds up over time
     level_name = {"1": "Easy", "2": "Medium", "3": "Hard"}.get(level, "Medium")
     with open(SCORE_FILE, "a") as f:
         f.write(f"{level_name},{wpm},{accuracy}\n")
 
 
 def show_best_score():
+    # reads every saved attempt and picks out the highest WPM ever recorded
     if not os.path.exists(SCORE_FILE):
         print("No scores recorded yet, take a test first.")
         return
@@ -144,6 +155,7 @@ def show_best_score():
 
 
 def show_average():
+    # goes through every saved attempt and averages out speed + accuracy
     if not os.path.exists(SCORE_FILE):
         print("No scores recorded yet.")
         return
@@ -172,6 +184,8 @@ def show_average():
 
 
 def multi_round_test():
+    # runs the test back to back for however many rounds the user wants,
+    # then averages the WPM/accuracy across all rounds
     rounds = input("How many rounds do you want to play? ").strip()
     if not rounds.isdigit() or int(rounds) < 1:
         print("Enter a valid number.")
@@ -193,6 +207,7 @@ def multi_round_test():
 
 
 def menu():
+    # main menu shown every time we loop back after an action finishes
     print("\n===== Typing Speed Test =====")
     print("1. Take a test")
     print("2. Multi-round test (average score)")
@@ -202,6 +217,7 @@ def menu():
 
 
 def main():
+    # keeps showing the menu and routing to the right function until user exits
     while True:
         menu()
         choice = input("Choice: ").strip()
