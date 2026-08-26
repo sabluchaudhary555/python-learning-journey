@@ -1,231 +1,208 @@
-# Python — Variables
+# Python Variables — Short Notes
 
-> One concept. One example. No fluff.
-
----
-
-## What is a Variable?
-
-A label that points to a value stored in memory. No type declaration needed — Python infers it.
-
+## 1. What is a Variable?
+- A name that refers to a value stored in memory — like a label on a box.
+- No explicit type declaration needed — Python infers type from the assigned value.
+- Created the moment a value is assigned.
 ```python
-x    = 5
+x = 5
 name = "Hacker"
-print(x)      # 5
-print(name)   # Hacker
 ```
 
 ---
 
-## Naming Rules
-
+## 2. Rules for Naming Variables
 | Rule | Valid | Invalid |
 |---|---|---|
-| Letters, digits, underscore only | `user_1` | `user-1` |
+| Letters, digits, underscore only | `user_1` | `user-1` (hyphen) |
 | Cannot start with a digit | `_score` | `1score` |
-| Case-sensitive | `name` ≠ `Name` | — |
-| No Python keywords | `total` | `class`, `if`, `for` |
+| Case-sensitive | `Name ≠ name` | — |
+| Cannot use keywords | `total` | `class`, `if` |
 
+> `myVar`, `myvar`, `MYVAR` are three **different** variables — Python is case-sensitive.
+
+---
+
+## 3. Assigning Values
+
+### Basic Assignment
+- `=` means "store this value", not "equal to".
 ```python
-age         = 21     # ✓
-_colour     = "red"  # ✓
-total_score = 90     # ✓
+x = 5
+```
 
-# 1name = "x"     ❌ starts with digit
-# class = 10      ❌ reserved keyword
-# user-name = "x" ❌ hyphen not allowed
+### Dynamic Typing
+- Same variable can hold different types over time.
+```python
+x = 10                # int
+x = "Now a string"    # str — valid
 ```
 
 ---
 
-## Assigning Values
+## 4. Multiple Assignments
 
+**Same value to multiple variables:**
 ```python
-x = 5          # int
-y = 3.14       # float
-z = "Hello"    # str
-```
-
-**Dynamic typing** — same variable can change type:
-
-```python
-x = 10               # int
-x = "Now a string"   # str — perfectly valid
-```
-
----
-
-## Multiple Assignments
-
-```python
-# same value to multiple variables
 a = b = c = 100
-print(a, b, c)        # 100 100 100
-
-# different values in one line (tuple unpacking)
-x, y, z = 1, 2.5, "Python"
-print(x, y, z)        # 1 2.5 Python
-
-# swap without a temp variable
-a, b = 5, 10
-a, b = b, a
-print(a, b)           # 10 5
 ```
 
-> Right-hand side is fully evaluated **before** any assignment happens — that's why swap works.
+**Different values in one line (tuple unpacking):**
+```python
+x, y, z = 1, 2.5, "Python"
+```
+
+**Fibonacci-style swap (no temp variable):**
+```python
+a, b = 0, 1
+while a < 10:
+    print(a)
+    a, b = b, a + b
+```
+> Right-hand side is fully evaluated **before** any assignment happens — that's why `a, b = b, a+b` works without a temp variable.
 
 ---
 
-## Object References
+## 5. Object Reference
 
-Variables are **labels pointing to objects**, not containers holding values.
-
+- `x = 5` → Python creates an object `5`; `x` stores a **reference** to it (not the value itself).
+- `y = x` → `y` points to the **same object**, doesn't copy it.
 ```python
-x = 5       # x ──► [object: 5]
-y = x       # y ──► same object
-
-print(id(x) == id(y))   # True — same memory address
+x = 5
+y = x
+print(id(x) == id(y))   # True — same object
 ```
 
 **Reassignment breaks the link:**
-
 ```python
 x = 5
 y = x
 x = "Geeks"
-
-print(x)    # Geeks
-print(y)    # 5  ← unchanged, still points to original object
+print(x)   # Geeks
+print(y)   # 5 ← unchanged, y still points to old object
 ```
 
-**⚠️ Mutable objects (lists) behave differently:**
-
+**Immutable reassignment doesn't affect other variables:**
 ```python
-rgb  = ["Red", "Green", "Blue"]
-rgba = rgb              # both point to same list
+x = 1
+y = x
+y = y + 1
+print(x)   # 1 ← unaffected
+print(y)   # 2 ← new object created
+```
 
+### ⚠️ Lists Behave Differently (Mutable)
+```python
+rgb = ["Red", "Green", "Blue"]
+rgba = rgb            # both point to SAME list
 rgba.append("Alpha")
-print(rgb)              # ["Red", "Green", "Blue", "Alpha"] ← rgb changed too!
-
-# to make a true independent copy
-correct = rgba[:]       # shallow copy
-correct[-1] = "X"
-print(rgba)             # unchanged
+print(rgb)             # also changed! ["Red","Green","Blue","Alpha"]
+```
+**True copy → use slicing:**
+```python
+correct = rgba[:]     # shallow copy, independent list
 ```
 
 ---
 
-## The `_` Variable (REPL only)
-
-In interactive mode, `_` stores the last printed result:
-
+## 6. The Special `_` Variable (REPL only)
+- In interactive mode, `_` auto-stores the **last printed expression**.
 ```python
 >>> 2 + 2
 4
->>> _           # 4
-
->>> 100 * 0.125
-12.5
->>> 100 + _     # 112.5
+>>> _
+4
 ```
-
-> Treat `_` as read-only. Don't assign to it manually.
+> Treat as read-only — don't manually assign to `_`.
 
 ---
 
-## Type Checking
+## 7. Type Checking & Type Casting
 
+### `type()` — check data type
 ```python
-x = 10
-y = 3.14
-z = "hello"
-
-print(type(x))              # <class 'int'>
-print(type(y))              # <class 'float'>
-print(type(z))              # <class 'str'>
-
-print(isinstance(x, int))           # True
-print(isinstance(x, str))           # False
-print(isinstance(x, (int, float)))  # True — check multiple types at once
+type(x)   # <class 'int'>
 ```
 
----
+### `isinstance()` — check instance (True/False)
+```python
+isinstance(x, int)             # True
+isinstance(x, (int, float))    # checks against multiple types
+```
 
-## Type Casting
-
-| Function | Converts to | Example |
+### Type Casting Functions
+| Function | Converts To | Example |
 |---|---|---|
-| `int()` | Integer | `int("10")` → `10` |
-| `float()` | Float | `float(5)` → `5.0` |
-| `str()` | String | `str(100)` → `"100"` |
-| `bool()` | Boolean | `bool(0)` → `False` |
+| `int()` | Integer | `int("10") → 10` |
+| `float()` | Float | `float(5) → 5.0` |
+| `str()` | String | `str(100) → "100"` |
+| `bool()` | Boolean | `bool(0) → False` |
 
 ```python
-print(float(5))     # 5.0
-print(int("42"))    # 42
-print(str(100))     # "100"
-print(4 * 3.75)     # 15.0 ← int auto-promoted to float in mixed arithmetic
+print(4 * 3.75)   # 14.0 — int auto-promoted to float in mixed arithmetic
 ```
 
 ---
 
-## Deleting a Variable — del
-
+## 8. Deleting a Variable — `del`
+- Removes variable from namespace; object becomes eligible for garbage collection **if nothing else references it**.
 ```python
 x = 10
 del x
-print(x)    # NameError: name 'x' is not defined
-```
+print(x)   # NameError
 
-```python
+# if another variable still references the object, it survives:
 x = 5
 y = x
 del x
-print(y)    # 5 ← y still works — object not collected while y points to it
+print(y)   # 5 ← still works
 ```
 
 ---
 
-## Naming Conventions (PEP 8)
-
-| Convention | Used for | Example |
+## 9. Naming Conventions (PEP 8)
+| Convention | Usage | Example |
 |---|---|---|
-| `snake_case` | Variables, functions | `user_name`, `total_score` |
-| `UPPER_SNAKE_CASE` | Constants | `MAX_SIZE`, `PI` |
-| `_single_leading` | Internal / private | `_helper` |
+| `snake_case` | Variables, functions | `user_name` |
+| `UPPER_SNAKE_CASE` | Constants | `MAX_SIZE` |
+| `_single_leading` | Internal/private use | `_helper` |
 | `__double_leading` | Name mangling (classes) | `__private` |
 | `CamelCase` | Class names only | `MyClass` |
 
+---
+
+## 10. Practical Patterns
 ```python
-user_age      = 22       # variable
-MAX_RETRIES   = 3        # constant
-_internal_flag = True    # private/internal
+# Swap without temp variable
+a, b = 5, 10
+a, b = b, a                     # 10 5
+
+# String length
+length = len("Python")           # 6
+
+# Running total
+total = 0
+total += 10
+total += 20                      # 30
+
+# Chained comparison
+x = 15
+print(10 < x < 20)               # True
 ```
 
 ---
 
-## Practical Patterns
-
-```python
-# swap two variables
-a, b = 5, 10
-a, b = b, a
-print(a, b)           # 10 5
-
-# running total
-total  = 0
-total += 10
-total += 20
-print(total)          # 30
-
-# chained comparison
-x = 15
-print(10 < x < 20)   # True
-
-# fibonacci using multiple assignment
-a, b = 0, 1
-while a < 100:
-    print(a, end=", ")
-    a, b = b, a + b
-# 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89,
-```
+## 📋 Quick Recap
+| Concept | Key Point |
+|---|---|
+| Variable | Label pointing to an object in memory, no type declaration needed |
+| Naming rules | Letters/digits/underscore, no digit-start, no keywords, case-sensitive |
+| Dynamic typing | Same variable can change type over time |
+| Multiple assignment | `a=b=c=val` or `x,y,z = 1,2,3` |
+| Object reference | Variables store references, not values |
+| Mutable objects (list) | Shared reference — changes reflect across all pointers |
+| Immutable objects (int/str) | Reassignment creates a new object, old references unaffected |
+| `del` | Removes variable; object GC'd only if no other reference exists |
+| `type()` / `isinstance()` | Check data type / check instance type |
+| Type casting | `int()`, `float()`, `str()`, `bool()` |
+| PEP 8 | `snake_case` vars, `UPPER_CASE` constants, `CamelCase` classes |
