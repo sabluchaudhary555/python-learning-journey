@@ -56,11 +56,5 @@ def analyze(text):
 
 
 if __name__ == "__main__":
-    sample_text = """
-    Python is a powerful and easy to learn programming language.
-    Python is widely used for web development, data analysis,
-    automation and machine learning. Many beginners choose Python
-    as their first programming language because it is simple and readable.
-    """
-
-    analyze(sample_text)
+    user_text = input("Enter your text: ")
+    analyze(user_text)
